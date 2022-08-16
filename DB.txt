@@ -34,6 +34,8 @@ Student {
   year: number, // default: 1, min: 1, max: 5, bu nechinchi kursligi, 1-, 2-, ...
   
   media?: string[] | null,  // ***buni kiyinchalik ishlatamiz
+  
+  status: boolean, // default: true
 }
 
 Building {
@@ -43,6 +45,7 @@ Building {
   media?: string[] | null,  // ***buni kiyinchalik ishlatamiz
   
   gender: boolean, // default: false, ***true - Erkak, false - Ayol
+  status: boolean, // default: true
 }
 
 Room {
@@ -53,11 +56,36 @@ Room {
   
   building: ObjectId, // required, ref: Building, ***Bu bino
   floor: number, // default: 0, min: 0, max: 100, ***bu nechanchi qavatligi
+  beds: number, // default: 1, min: 0, max: 100, *** bu honadagi joylar soni, misol 2-karavat, 3-ta karavat
   
-  
+  status: boolean, // default: true, ***bu hona odam quyishga tayormi yuqmi shunisi
 }
 
-Bed {}
+Bed {
+  _id,
+  name: string, // required, min: 3, max: 100,
+  building: ObjectId, // required, ref: Building,
+  room: ObjectId, // required, ref: Room,
+  
+  media?: string[] | null,  // ***buni kiyinchalik ishlatamiz
+  status: boolean, // default: true, ***bu joy odam turishiga tayormi yuqmi shu, band yoki band emasligi emas.
+}
+
+
+
+
+
+Application {
+  _id,
+  aid: string, // application id
+  student: ObjectId,
+  
+  createdAt,
+  updatedAt,
+  
+  status: number, default: 0, max: 10
+    
+}
 
 
 
