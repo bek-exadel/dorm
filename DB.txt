@@ -74,18 +74,39 @@ Bed {
 
 
 
-
+##########################################################################################
 Application {
   _id,
   aid: string, // application id
   student: ObjectId,
-  
-  createdAt,
-  updatedAt,
-  
   status: number, default: 0, max: 10
-    
+  createdAt: Date,
+  updatedAt: Date,
 }
+
+ContractOrder {
+  _id,
+  
+  building: ObjectId, // ref: Building
+  room: ObjectId, // ref: Room
+  bed: ObjectId, // ref: Bed
+  
+  department: ObjectId, // ref: Department
+  faculty: ObjectId, // ref: Faculty
+  year: number, // default: 1, min: 1, max: 10
+  student: ObjectId, // ref: Student
+  
+  startDate: Date,
+  endDate: Date,
+  
+  // price ??  
+  
+  status: number, // default: 0, min: 0, max: 10
+  
+  createdAt: Date,
+  updatedAt: Date,
+}
+
 
 
 
