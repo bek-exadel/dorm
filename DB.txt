@@ -109,7 +109,10 @@ Application {
     user: ObjectId | null, // ***kim tomonidan kurib chiqildi
     statusCode: number, // ***arizani progresi qande buldi
     text: string | null, // ***qushimcha comment lar,
-  }],  
+  }],
+  
+  // imtiyozlar??
+  // media?: string[] | null,
   
   createdAt: Date,
   updatedAt: Date,
