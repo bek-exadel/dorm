@@ -1,3 +1,24 @@
+1) Roles: 
+admin: Who can manage (CRUD) - Users, Departments, Faculties, Student, Buildings, Rooms, Beds
+manager: Who can manage - Applications, ContractOrders
+tenant: Who can manage his/her own building, Binoni qorovulimi nima diyiladi, commendantimi, hullas bino eshigini tagida utirib kim kiryapdi kim chiqyapdi nazorat qilib turuvchi.
+***: Yana boshqa uzlaringham Role yaratishizlar mumkin.
+
+
+2) Database Collections
+
+User {
+  _id,
+  username: string, // required, unique, min: 5, max: 100
+  password: string, // required
+  role: string, // required, min: 3, max: 100
+  
+  status: boolean,
+  department: ObjectId | null, // default: null
+  faculty: ObjectId | null, // default: null
+  building: ObjectId | null, // default: null
+}
+
 Department {
   _id,
   name: string, // min: 5, max: 100, required, unique
@@ -69,6 +90,8 @@ Bed {
   
   media?: string[] | null,  // ***buni kiyinchalik ishlatamiz
   status: boolean, // default: true, ***bu joy odam turishiga tayormi yuqmi shu, band yoki band emasligi emas.
+  
+  // price ?
 }
 
 
@@ -79,7 +102,15 @@ Application {
   _id,
   aid: string, // application id
   student: ObjectId,
-  status: number, default: 0, max: 10
+  
+  currentStatus: number, default: 0, max: 10 // ***arizani ohirgi, ayni paytdagi holati
+  statusUpdates: [{
+    timestamp: Date,
+    user: ObjectId | null, // ***kim tomonidan kurib chiqildi
+    statusCode: number, // ***arizani progresi qande buldi
+    text: string | null, // ***qushimcha comment lar,
+  }],  
+  
   createdAt: Date,
   updatedAt: Date,
 }
@@ -99,7 +130,11 @@ ContractOrder {
   startDate: Date,
   endDate: Date,
   
-  // price ??  
+  // price ?? monthly? daily?
+  // count ?? number of months, number of days ??
+  // discount ?? monthly? daily?
+  // discountDetail ??
+  // total ??
   
   status: number, // default: 0, min: 0, max: 10
   
@@ -109,4 +144,16 @@ ContractOrder {
 
 
 
+
+3) API Docs
+
+/api/auth/login => | {username, password} | <= {token}
+
+/api/users/*** CRUD
+/api/departments/*** CRUD
+/api/faculties/*** CRUD
+/api/students/*** CRUD
+/api/buildings/*** CRUD
+/api/rooms/*** CRUD
+/api/beds/*** CRUD
 
